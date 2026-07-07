@@ -1,0 +1,38 @@
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+
+  .bottom-nav {
+    display: block;
+  }
+
+  .map-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  #map {
+    height: 340px;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .gauge-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .view {
+    padding: 8px 14px 30px;
+  }
+
+  main {
+    padding-bottom: 76px;
+  }
+}

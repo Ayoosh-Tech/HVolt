@@ -1,0 +1,222 @@
+/* ==========================================================================
+   Design tokens (light + dark) and global resets
+   ========================================================================== */
+:root {
+  --bg: #F6F9F6;
+  --surface: #FFFFFF;
+  --surface-2: #EFF4F0;
+  --text: #12181A;
+  --muted: #5B6B63;
+  --border: #E1E9E3;
+  --green: #1FA463;
+  --green-dark: #178152;
+  --amber: #F2B705;
+  --red: #E8483A;
+  --gray: #9AA6A0;
+  --blue: #2E6FEA;
+  --shadow: 0 1px 2px rgba(20, 30, 25, 0.04), 0 8px 24px rgba(20, 30, 25, 0.06);
+  --radius: 16px;
+}
+
+html.dark {
+  --bg: #12181A;
+  --surface: #1B2225;
+  --surface-2: #212A2D;
+  --text: #EDF2F0;
+  --muted: #93A29B;
+  --border: #2A3336;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+h1,
+h2,
+h3,
+.display {
+  font-family: "Sora", sans-serif;
+}
+
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 8px;
+}
+
+/* ==========================================================================
+   App shell layout
+   ========================================================================== */
+#app {
+  display: flex;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 80px;
+}
+
+.view {
+  padding: 8px 22px 30px;
+  max-width: 1180px;
+}
+
+.view h1 {
+  font-size: 26px;
+  margin: 4px 0 4px;
+}
+
+.view .lede {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 20px;
+}
+
+/* ---------- Sidebar (desktop) ---------- */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar-foot {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+/* ---------- Brand / logo ---------- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px 22px;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--green), var(--amber));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+}
+
+.brand-sub {
+  font-size: 10.5px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: -2px;
+}
+
+/* ---------- Sidebar nav items ---------- */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 14.5px;
+  font-weight: 600;
+  text-align: left;
+  width: 100%;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-item svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
+
+.nav-item:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.nav-item.active {
+  background: var(--green);
+  color: #fff;
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* The logo sits at the far left of the top bar; this spacer pushes the
+   language/theme/account controls to the right, keeping the brand visible
+   at the top of the screen on every breakpoint. */
+.topbar-spacer {
+  flex: 1;
+}
+
+.topbar .brand {
+  padding: 0;
+}
+
+.topbar .brand-mark {
+  width: 30px;
+  height: 30px;
+}
+
+.topbar .brand-name {
+  font-size: 16px;
+}
