@@ -3,6 +3,7 @@
 // reads strings through the `t()` helper (see src/i18n/index.js), so no other
 
 
+
 // file needs to change.
 export const TRANSLATIONS = {
   en: {
@@ -107,6 +108,11 @@ export const TRANSLATIONS = {
     passwordChanged: "Password changed successfully.",
     currentPasswordIncorrect: "Current password is incorrect.",
     changePasswordButton: "Change Password",
+    withdrawReport: "Withdraw Report 🗑",
+    withdrawReportConfirm: "Are you sure you want to withdraw this report? This action cannot be undone.",
+    reportWithdrawn: "Report withdrawn successfully.",
+    reportAlreadyWithdrawn: "This report has already been withdrawn.",
+    withdrawn: "Withdrawn",  
     password: "Password",
     name: "Full name",
     send: "Send reset link",
@@ -169,6 +175,11 @@ export const TRANSLATIONS = {
     passwordChanged: "An yi nasarar canja kalma sirri.",
     currentPasswordIncorrect: "Kalmar sirri ta yanzu ba daidai ba ce.",
     changePasswordButton: "Canza Kalmar Sirri",
+    withdrawReport: "Janye Rahoto 🗑",
+    withdrawReportConfirm: "kana da tabbacin cewa kana son janye wannan rahoton? Wannan aiki ba za a iya dawo da shi ba.",
+    reportWithdrawn: "An janye rahoton cikin nasara.",
+    reportAlreadyWithdrawn: "An riga janye wannan rahoton.",
+    withdrawn: "An Janye", 
     login: "Shiga",
     logout: "Fita",
     register: "Ƙirƙiri asusu",

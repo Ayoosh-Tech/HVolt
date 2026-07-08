@@ -30,18 +30,18 @@ export default function ReportForm() {
   }
 
   async function handleSubmit() {
-    console.log("Neighborhoods:", neighborhoods);
-    console.log("Length:", neighborhoods.length);
-    console.log("Selected ID:", neighborhoodId);
+    //console.log("Neighborhoods:", neighborhoods);
+    //console.log("Length:", neighborhoods.length);
+    //console.log("Selected ID:", neighborhoodId);
 
     const comment = commentRef.current.value;
     const ok = await submitReport(neighborhoodId, comment);
     if (ok && commentRef.current) commentRef.current.value = "";
   }
 
-  console.log("Neighborhoods:", neighborhoods);
-  console.log("First neighborhood:", neighborhoods[0]);
-  console.log("Selected ID:", neighborhoodId);
+//console.log("Neighborhoods:", neighborhoods);
+  //console.log("First neighborhood:", neighborhoods[0]);
+  //console.log("Selected ID:", neighborhoodId);
 
   return (
     <>

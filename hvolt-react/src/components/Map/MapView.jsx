@@ -71,7 +71,7 @@ export default function MapView({ neighborhoods, flyTarget, popupTargetId }) {
 }
 
 function MarkerPopup({ neighborhood, status, latest, t }) {
-  const { confirmReport, flagReport } = useApp();
+  const { user, confirmReport, flagReport, withdrawReport } = useApp();
   return (
     <div style={{ fontFamily: "Inter, sans-serif", minWidth: 180 }}>
       <div style={{ fontWeight: 700, fontSize: 13.5, marginBottom: 2 }}>{neighborhood.name}</div>
@@ -97,20 +97,39 @@ function MarkerPopup({ neighborhood, status, latest, t }) {
           {latest.confirmations} {t("confirmationsN")} · {timeAgo(latest.ts)}
         </div>
       )}
-      <div style={{ display: "flex", gap: 6 }}>
-        <button
-          onClick={() => confirmReport(neighborhood.id)}
-          style={popupBtnStyle}
-        >
-          {t("confirm")}
-        </button>
-        <button
-          onClick={() => flagReport(neighborhood.id)}
-          style={popupBtnStyle}
-        >
-          {t("flagFalse")}
-        </button>
-      </div>
+      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+  <button
+    onClick={() => confirmReport(neighborhood.id)}
+    style={popupBtnStyle}
+  >
+    {t("confirm")}
+  </button>
+
+  <button
+    onClick={() => flagReport(neighborhood.id)}
+    style={popupBtnStyle}
+  >
+    {t("flagFalse")}
+  </button>
+
+  {latest?.reporterId === user?.id && latest?.status !== "withdrawn" && (
+    <button
+      onClick={() => {
+        if (window.confirm(t("withdrawReportConfirm"))) {
+          withdrawReport(latest.id);
+        }
+      }}
+      style={{
+        ...popupBtnStyle,
+        background: "#ffe5e5",
+        color: "#c62828",
+      }}
+    >
+       {t("withdrawReport")}
+    </button>
+  )}
+</div>
+
     </div>
   );
 }

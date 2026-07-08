@@ -20,6 +20,7 @@ export const reportsApi = {
   create: (payload, token) => request("/reports", { method: "POST", body: payload, token }),
   confirm: (id, token) => request(`/reports/${id}/confirm`, { method: "POST", token }),
   flag: (id, reason, token) => request(`/reports/${id}/flag`, { method: "POST", body: { reason }, token }),
+  withdraw: (id, token) => request(`/reports/${id}/withdraw`, { method: "PATCH", token }),
 };
 
 // Mirrors .../routes/adminRoutes.js — every call here requires an admin token.

@@ -265,6 +265,24 @@ export function AppProvider({ children }) {
     [user, latestReportFor, toast, loadReports, loadNeighborhoods]
   );
 
+  const withdrawReport = useCallback(
+    async (reportId) => {
+      if (!user || !tokenRef.current) {
+        toast("__loginRequired__");
+        setAuthModal("login");
+        return;
+      }
+      try {
+        await reportsApi.withdraw(reportId, tokenRef.current);
+        toast("__reportWithdrawn__");
+        await Promise.all([loadReports(), loadNeighborhoods()]);
+      } catch (err) {
+        toast(err.message);
+      }
+    },
+    [user, toast, loadReports, loadNeighborhoods]
+  );
+
   /* ---------------- Admin actions ---------------- */
 
   const adminSetStatus = useCallback(
@@ -272,7 +290,7 @@ export function AppProvider({ children }) {
       if (!tokenRef.current) return;
       try {
         await adminApi.updateReportStatus(reportId, status, tokenRef.current);
-        toast(status === "verified" ? "__toastVerified__" : "__toastRejected__");
+        toast(status === "verified" ? "__toastVerified__" : "__toastRejected__" );
         await Promise.all([loadReports(), loadNeighborhoods()]);
       } catch (err) {
         toast(err.message);
@@ -341,6 +359,7 @@ export function AppProvider({ children }) {
       submitReport,
       confirmReport,
       flagReport,
+      withdrawReport,
       adminSetStatus,
       adminRemoveReport,
       toggleAdminRole,
@@ -370,6 +389,7 @@ export function AppProvider({ children }) {
       submitReport,
       confirmReport,
       flagReport,
+      withdrawReport,
       adminSetStatus,
       adminRemoveReport,
       toggleAdminRole,
