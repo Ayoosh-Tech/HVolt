@@ -32,4 +32,6 @@ router.post(
   reportController.flag
 );
 
+router.patch("/:id/withdraw", requireAuth, reportController.withdraw);
+
 module.exports = router;

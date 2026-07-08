@@ -5,7 +5,7 @@ const reportSchema = new mongoose.Schema(
     type: { type: String, enum: ["outage", "restoration"], required: true },
     status: {
       type: String,
-      enum: ["unverified", "verified", "flagged", "rejected"],
+      enum: ["unverified", "verified", "flagged", "rejected", "withdrawn"],
       default: "unverified",
     },
     neighborhood: { type: mongoose.Schema.Types.ObjectId, ref: "Neighborhood", required: true, index: true },

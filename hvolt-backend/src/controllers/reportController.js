@@ -5,7 +5,9 @@ const { refreshNeighborhood } = require("../services/neighborhoodService");
 async function list(req, res, next) {
   try {
     const { neighborhood, status, type, page = 1, limit = 20 } = req.query;
-    const filter = {};
+    const filter = {
+      status: { $ne: "withdrawn" }, // Exclude withdrawn reports from the list
+    };
     if (neighborhood) filter.neighborhood = neighborhood;
     if (status) filter.status = status;
     if (type) filter.type = type;
@@ -124,4 +126,48 @@ async function flag(req, res, next) {
   }
 }
 
-module.exports = { list, create, confirm, flag };
+async function withdraw(req, res, next) {
+  try {
+    const report = await Report.findById(req.params.id);
+
+    if (!report) {
+      return res.status(404).json({
+        message: "Report not found.",
+      });
+    }
+
+    // Only the owner can withdraw
+    if (report.reporter.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        message: "You can only withdraw your own report.",
+      });
+    }
+
+    if (report.status === "withdrawn") {
+      return res.status(400).json({
+        message: "Report has already been withdrawn.",
+      });
+    }
+
+    report.status = "withdrawn";
+    await report.save();
+
+    await User.findByIdAndUpdate(req.user._id, {
+      $inc: { reportsCount: -1 },
+    });
+
+    const io = req.app.get("io");
+    const neighborhood = await refreshNeighborhood(io, report.neighborhood);
+
+    res.json({
+      message: "Report withdrawn successfully.",
+      report,
+      neighborhood,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+
+module.exports = { list, create, confirm, flag, withdraw };
