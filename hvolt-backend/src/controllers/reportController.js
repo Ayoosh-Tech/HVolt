@@ -12,7 +12,7 @@ async function list(req, res, next) {
 
     const reports = await Report.find(filter)
       .populate("neighborhood", "name state lga")
-      .populate("reporter", "name")
+      .populate("reporter", "_id name")
       .sort({ createdAt: -1 })
       .skip((page - 1) * limit)
       .limit(Number(limit));
@@ -55,7 +55,7 @@ async function create(req, res, next) {
     await User.findByIdAndUpdate(req.user._id, { $inc: { reportsCount: 1 } });
 
     const io = req.app.get("io");
-    const populated = await report.populate("reporter", "name");
+    const populated = await report.populate("reporter", "_id name");
     io?.to(`neighborhood:${neighborhood}`).emit("report:new", populated);
 
     const updatedNeighborhood = await refreshNeighborhood(io, neighborhood);

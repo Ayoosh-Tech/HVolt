@@ -84,4 +84,31 @@ async function me(req, res) {
   res.json({ user: req.user.toSafeJSON() });
 }
 
-module.exports = { register, login, forgotPassword, resetPassword, me };
+
+async function changePassword(req, res, next) {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    const user = await User.findById(req.user._id).select("+passwordHash");
+
+    const match = await user.comparePassword(currentPassword);
+
+    if (!match) {
+      return res.status(400).json({
+        message: "Current password is incorrect.",
+      });
+    }
+
+    await user.setPassword(newPassword);
+    await user.save();
+
+    res.json({
+      message: "Password changed successfully.",
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+
+module.exports = { register, login, forgotPassword, resetPassword, me, changePassword };

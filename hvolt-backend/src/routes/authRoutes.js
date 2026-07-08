@@ -51,4 +51,12 @@ router.post(
 
 router.get("/me", requireAuth, authController.me);
 
+router.post(
+  "/change-password",
+  requireAuth,
+  [body("currentPassword").notEmpty().withMessage("Current password is required."), body("newPassword").isLength({ min: 8 }).withMessage("New password must be at least 8 characters.")],
+  handleValidation,
+  authController.changePassword
+);
+
 module.exports = router;

@@ -7,9 +7,7 @@ export default function ProfileHeader() {
   // Generate initials if there's no profile picture
   const initials =
     user?.name
-      ?.split(" ")
-      .map((word) => word[0])
-      .join("")
+      ?.charAt(0)
       .toUpperCase() || "U";
 
   return (

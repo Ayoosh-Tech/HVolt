@@ -25,6 +25,7 @@ export function normalizeReport(r) {
   const neighborhoodId =
     r.neighborhood && typeof r.neighborhood === "object" ? r.neighborhood._id : r.neighborhood;
   const reporterName = r.reporter && typeof r.reporter === "object" ? r.reporter.name : r.reporter || "Unknown";
+  const reporterId = r.reporter && typeof r.reporter === "object" ? r.reporter._id : r.reporter || null;
 
   return {
     id: r._id || r.id,
@@ -33,6 +34,7 @@ export function normalizeReport(r) {
     status: r.status,
     confirmations: Array.isArray(r.confirmations) ? r.confirmations.length : r.confirmations || 0,
     reporter: reporterName,
+    reporterId,
     comment: r.comment || "",
     ts: r.createdAt ? new Date(r.createdAt).getTime() : Date.now(),
   };
