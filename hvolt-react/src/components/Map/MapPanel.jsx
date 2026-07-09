@@ -51,7 +51,7 @@ export default function MapPanel({ neighborhoods, onFocusNeighborhood, onFlyToCo
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-      </div>
+      
 
       {results.length > 0 && (
         <div className="search-results">
@@ -68,7 +68,7 @@ export default function MapPanel({ neighborhoods, onFocusNeighborhood, onFlyToCo
           ))}
         </div>
       )}
-
+</div>
       <div>
         <label className="helper" style={{ display: "block", marginBottom: 6 }}>
           {t("filterState")}

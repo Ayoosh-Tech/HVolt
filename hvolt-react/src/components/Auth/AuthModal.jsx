@@ -75,7 +75,7 @@ function RegisterForm() {
       <p className="sub">{t("registerSub")}</p>
       <div className="field">
         <label>{t("name")}</label>
-        <input ref={nameRef} placeholder="Amina Bello" />
+        <input ref={nameRef} placeholder="Aisha Bello" />
       </div>
       <div className="field">
         <label>{t("email")}</label>
