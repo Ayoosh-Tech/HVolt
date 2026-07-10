@@ -35,4 +35,34 @@
   main {
     padding-bottom: 76px;
   }
+
+  .card{
+    padding: 12px;
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .tabs{
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .tabs button{
+    flex-shrink: 0;
+  }
+
+  .row-actions{
+    display: flex;
+    gap: 6px;
+  }
+
+  .row-actions button{
+    padding: 6px 8px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
 }

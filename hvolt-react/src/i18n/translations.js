@@ -33,7 +33,7 @@ export const TRANSLATIONS = {
     unverified: "Unverified outage",
     noReports: "No recent reports",
     neighborhoods: "Neighborhoods",
-    mapHeading: "Li]ve Electricity Map",
+    mapHeading: "Live Electricity Map",
     mapLede: "Real-time community-reported power status across Nigeria.",
     dashHeading: "Dashboard",
     dashLede: "A snapshot of power reliability across your communities.",

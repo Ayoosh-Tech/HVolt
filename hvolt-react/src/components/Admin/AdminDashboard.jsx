@@ -6,6 +6,7 @@ import { gaugeColorVar, statusBadgeBg, statusBadgeFg, timeAgo } from "../../util
 export default function AdminDashboard() {
   const { adminTab, setAdminTab } = useApp();
   const { t } = useTranslation();
+  const { user, logout } = useApp();
 
   return (
     <>
@@ -25,6 +26,14 @@ export default function AdminDashboard() {
       {adminTab === "reports" && <ReportsTab />}
       {adminTab === "users" && <UsersTab />}
       {adminTab === "analytics" && <AnalyticsTab />}
+
+      <button
+          className="btn btn-primary"
+          style={{ marginTop: "20px", float: "right"}}
+          onClick={logout}
+        >
+          {t("logout") }
+        </button>
     </>
   );
 }
@@ -177,6 +186,8 @@ function AnalyticsTab() {
           {reports.filter((r) => r.status === "flagged").length} {t("flagged").toLowerCase()}
         </div>
       </div>
+
     </div>
+
   );
 }
